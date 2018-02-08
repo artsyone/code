@@ -41,7 +41,7 @@ FGREEN =(34,139,34)
 # Sound Effects
 pygame.mixer.music.load("sounds/tv.ogg")
 friends = pygame.image.load("friends.jpg")
-
+shoe = pygame.image.load("shoe.png")
 
 num_clouds = 1
 clouds = []
@@ -293,7 +293,12 @@ while not done:
         pygame.draw.line(screen, WHITE, [475, 264], [489,264],3)
         pygame.draw.line(screen, BLACK, [489, 277], [489,264],3)
         pygame.draw.line(screen, BLACK, [502, 264],[489,264] ,3)
-        screen.blit(friends,(274,249))
+
+        if f == BLACK:    
+                pygame.draw.rect(screen, f , [274, 248, 162, 147])
+
+        else:
+                screen.blit(friends,(274,249))
 
     elif count == 2:
         pygame.draw.line(screen, BLACK, [489, 250], [489,264],3)
@@ -325,6 +330,12 @@ while not done:
         pygame.draw.line(screen, BLACK, [475, 264], [489,264],3)
         pygame.draw.line(screen, BLACK, [489, 277], [489,264],3)
         pygame.draw.line(screen, WHITE, [502, 264],[489,264] ,3)
+        if f == BLACK:    
+                pygame.draw.rect(screen, f , [274, 248, 162, 147])
+
+        else:
+                screen.blit(shoe,(274,249))
+
 
 
     elif count == 4:
