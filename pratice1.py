@@ -3,7 +3,7 @@ import pygame
 import math
 import random
 
-# Initialize game engine
+# Initia lize game engine
 pygame.mixer.pre_init()
 pygame.init()
 
@@ -41,7 +41,8 @@ FGREEN =(34,139,34)
 # Sound Effects
 pygame.mixer.music.load("sounds/tv.ogg")
 friends = pygame.image.load("friends.jpg")
-shoe = pygame.image.load("shoe.png")
+shoe = pygame.image.load("shoe2.png")
+ad = pygame.image.load("ad4.jpg")
 
 num_clouds = 1
 clouds = []
@@ -51,15 +52,6 @@ for i in range(num_clouds):
     loc = [x, y]
     clouds.append(loc)
 
-static = []
-  
-for i in range(200,400):
-    x = random.randrange(274,434)
-    y = random.randrange(255, 380)
-    r = random.randrange(1,5)
-    z = [ x,y,r,r,]
-        
-    static.append(z)
         
 colors = [RED,REDL,ORANGE,YELLOW]
 xgoes =[300,310,320,330,340,350,369,370,380,390,400]
@@ -298,6 +290,8 @@ while not done:
                 pygame.draw.rect(screen, f , [274, 248, 162, 147])
 
         else:
+
+                
                 screen.blit(friends,(274,249))
 
     elif count == 2:
@@ -330,11 +324,13 @@ while not done:
         pygame.draw.line(screen, BLACK, [475, 264], [489,264],3)
         pygame.draw.line(screen, BLACK, [489, 277], [489,264],3)
         pygame.draw.line(screen, WHITE, [502, 264],[489,264] ,3)
+        pygame.draw.rect(screen, WHITE , [274, 248, 162, 147])
         if f == BLACK:    
                 pygame.draw.rect(screen, f , [274, 248, 162, 147])
 
         else:
-                screen.blit(shoe,(274,249))
+                screen.blit(ad,(274,249))
+                screen.blit(shoe,(274,335))
 
 
 
