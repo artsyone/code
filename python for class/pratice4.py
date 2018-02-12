@@ -40,10 +40,10 @@ DBLUE = (0,57,89)
 
 
 # Sound Effects
-tv = pygame.mixer.music.load("sounds/tv.ogg")
+tv = pygame.mixer.music.load("sounds/tv1.ogg")
 laugh = pygame.mixer.music.load("sounds/friends.ogg")
 birds = pygame.mixer.music.load("sounds/birds.ogg")
-friends = pygame.image.load("friends.jpg")
+
 guide = pygame.image.load("guide3.png")
 shoe = pygame.image.load("shoe2.png")
 man1= pygame.image.load("man1.png")
@@ -70,6 +70,9 @@ ygoes =[315,320,325,330,335]
 postions = [489, 250, 489,264],[475, 264, 489,264],[489, 277, 489,264],[502, 264,489,264]
 knobp = [489, 328,489,314],[475, 314, 489,314],[489, 300, 489,314],[502, 314,489,314]
 
+loc = [274, 335]
+vel = [0, 0]
+speed = 5
 
 
 
@@ -137,12 +140,13 @@ def draw_bush(x, y):
     pygame.draw.ellipse(screen, FGREEN, [x + 15, y, 30, 30])
 
 
-def draw_shoe(j):
-    x = j[0]
-    y = j[1]
-    ((x + 274,y + 335))
 
-
+def draw_block(loc):
+    
+    x = loc[0]
+    y = loc[1]
+    screen.blit(shoe,(x,y))
+    
 
 daytime = True
 tvbuzz = False
@@ -156,7 +160,7 @@ count1 = 0
 
 
 # Game loop
-#pygame.mixer.music.play(-1)
+pygame.mixer.music.play(-1)
 
 done = False
 
@@ -179,9 +183,28 @@ while not done:
 
             elif event.key == pygame.K_RIGHT:
                 dancerglass = not dancerglass
-                
-                # Game logic (Check for collisions, update points, etc.)
 
+            if event.key == pygame.K_s:
+                vel[0] = speed
+            elif event.key == pygame.K_a:
+                vel[0] = -1 * speed
+            elif event.key == pygame.K_w:
+                vel[1] = -1 * speed
+            elif event.key == pygame.K_z:
+                vel[1] = speed
+        elif event.type == pygame.KEYUP:
+            if event.key == pygame.K_s:
+                vel[0] = 0
+            elif event.key == pygame.K_a:
+                vel[0] = 0
+            elif event.key == pygame.K_w:
+                vel[1] = 0
+            elif event.key == pygame.K_z:
+                vel[1] = 0
+                
+     # Game logic (Check for collisions, update points, etc.)
+    loc[0] += vel[0]
+    loc[1] += vel[1]
                 
     for s in clouds:
         s[0] -= 1
@@ -339,11 +362,13 @@ while not done:
         pygame.draw.line(screen, BLACK, [502, 264],[489,264] ,3)
         pygame.draw.rect(screen, BLACK , [274, 248, 162, 147])
         pygame.draw.rect(screen, BLUE , [274, 248, 162, 147])
+       
         
         
         if f == BLACK:    
                 pygame.draw.rect(screen, f , [274, 248, 162, 147])
-        else:       
+        else:
+                
                 static = []
           
                 for i in range(200,400):
@@ -357,7 +382,7 @@ while not done:
                 
                 for z in static:
                         pygame.draw.ellipse(screen,GREEN,z)
-
+                
                 
             
     elif count == 3:
@@ -373,14 +398,8 @@ while not done:
                 pygame.draw.rect(screen, f , [274, 248, 162, 147])
 
         else:
-            x = 274
-            y = 335
-            count2 = 5 
-            while count2 > 0:
-                screen.blit(shoe,(x,y))
-                x +=1
-                count2 -= 1
-        
+                draw_block(loc)
+               
         
           
 
